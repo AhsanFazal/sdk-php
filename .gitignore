@@ -1,9 +1,6 @@
-# PHPStorm
-.idea
-.idea/scopes/scope_settings.xml
-
-.idea/dictionaries/Thomas.xml
-
-.idea/inspectionProfiles/profiles_settings.xml
-
-.idea/inspectionProfiles/Project_Default.xml
+vendor/
+composer.lock
+composer.phar
+.DS_Store
+.idea/
+tests/ScholicaTestCredentials.php
