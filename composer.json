@@ -1,0 +1,29 @@
+{
+    "name": "scholica/scholica-php",
+    "homepage": "http://help.scholica.com/developers/API/php-api",
+    "description": "Scholica SDK for PHP - Use Scholica in your PHP project",
+    "keywords": ["scholica","sdk","api","learning"],
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Amazon Web Services",
+            "homepage": "http://aws.amazon.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/scholica/scholica-php/issues"
+    },
+    "require": {
+        "php": ">=5.4",
+        "ext-curl": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Scholica": "src/"
+        }
+    }
+}
