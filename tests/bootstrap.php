@@ -27,9 +27,14 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Scholica\ScholicaException;
 
 if (!file_exists(__DIR__ . '/ScholicaTestCredentials.php')) {
-    throw new FacebookSDKException(
+    throw new ScholicaException(
         'You must create a ScholicaTestCredentials.php file from ScholicaTestCredentials.php.dist'
     );
+}elseif(getenv('ACCESSTOKEN')){
+	require_once __DIR__ . '/ScholicaTestCredentials.php.dist';
+	ScholicaTestCredentials::$consumer_key = getenv('CONSUMERKEY');
+	ScholicaTestCredentials::$consumer_secret = getenv('CONSUMERSECRET');
+	ScholicaTestCredentials::$access_token = getenv('ACCESSTOKEN');
 }
 
 require_once __DIR__ . '/ScholicaTestCredentials.php';

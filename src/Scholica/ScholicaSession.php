@@ -59,7 +59,7 @@ class ScholicaSession {
     /**
      * @var string Main API endpoint
      */
-    private $endpoint = 'http://api.scholica.com/%v';
+    private $endpoint = 'https://api.scholica.com/%v';
 
     /**
      * @var string Login API endpoint
@@ -70,6 +70,11 @@ class ScholicaSession {
      * @var resource CURL connection resource
      */
     private $http;
+
+    /**
+     * @var object representing current user
+     */
+    private $me;
 
     /**
      * Initialize Scholica instance
@@ -191,12 +196,47 @@ class ScholicaSession {
     public function request($method, $fields=array()){
         $method = ltrim($method, '/');
 
+        $method = preg_replace('#/:u(ser)?#i', '/'.$this->me->id, $method);
+        $method = preg_replace('#/:c(ommunity)?#i', '/'.$this->me->community, $method);
+
         if(!isset($fields['token'])){ $fields['token'] = $this->request_token; }
 
-        $result = $this->HTTPPostRequest(str_replace('%v', $this->version, $this->endpoint) . $method, $fields);
+        $result = $this->HTTPPostRequest(str_replace('%v', $this->version, $this->endpoint) . '/' . $method, $fields);
+        
         if(empty($result)){ throw new ScholicaException('Empty response from token service'); }
+        
         if(!$json = @json_decode($result)){ throw new ScholicaException('Invalid response from token service'); }
+        
         if(isset($json->error)){ throw new ScholicaException($json->error->description, $json->error->code); }
+        
+        if(isset($json->result)){
+            $json = $json->result;
+        }
+
+        if($method == 'me'){
+            $this->me = $json;
+        }
+        
         return $json;
+    }
+
+    /**
+     * Get current user profile ('/me' request)
+     */
+    public function getMe(){
+        if(isset($this->me)){
+            return $this->me;
+        }else{
+            return $this->request('me');
+        }
+    }
+
+    /**
+     * Magic method to allow `$scholica->user->name` usage
+     */
+    public function __get($name){
+        if($name == 'me' || $name == 'user'){
+            return $this->getMe();
+        }
     }
 }
