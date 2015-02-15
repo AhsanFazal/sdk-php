@@ -3,6 +3,8 @@ scholica-php
 
 A class that makes it easier for developers to use the Scholica API and implement 'Login with Scholica' functionality into their web applications.
 
+[![Build Status](https://travis-ci.org/scholica/scholica-php.svg)](https://travis-ci.org/scholica/scholica-php)
+
 ## Installation
 
 Add it to your composer.json:
