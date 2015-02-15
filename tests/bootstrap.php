@@ -35,6 +35,6 @@ if (!file_exists(__DIR__ . '/ScholicaTestCredentials.php')) {
 	ScholicaTestCredentials::$consumer_key = getenv('CONSUMERKEY');
 	ScholicaTestCredentials::$consumer_secret = getenv('CONSUMERSECRET');
 	ScholicaTestCredentials::$access_token = getenv('ACCESSTOKEN');
+}else{
+	require_once __DIR__ . '/ScholicaTestCredentials.php';
 }
-
-require_once __DIR__ . '/ScholicaTestCredentials.php';
