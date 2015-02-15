@@ -1,5 +1,5 @@
 {
-    "name": "scholica/scholica-php",
+    "name": "scholica/scholica",
     "homepage": "http://help.scholica.com/developers/API/php-api",
     "description": "Scholica SDK for PHP - Use Scholica in your PHP project",
     "keywords": ["scholica","sdk","api","learning"],
@@ -7,8 +7,8 @@
     "license": "Apache-2.0",
     "authors": [
         {
-            "name": "Amazon Web Services",
-            "homepage": "http://aws.amazon.com"
+            "name": "Thomas Schoffelen",
+            "homepage": "http://www.scholica.com"
         }
     ],
     "support": {
