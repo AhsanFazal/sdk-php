@@ -3,6 +3,7 @@
     "homepage": "http://help.scholica.com/developers/API/php-api",
     "description": "Scholica SDK for PHP - Use Scholica in your PHP project",
     "keywords": ["scholica","sdk","api","learning"],
+    "version": "0.1.0",
     "type": "library",
     "license": "Apache-2.0",
     "authors": [
