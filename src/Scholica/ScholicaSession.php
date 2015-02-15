@@ -196,8 +196,11 @@ class ScholicaSession {
     public function request($method, $fields=array()){
         $method = ltrim($method, '/');
 
-        $method = preg_replace('#/:u(ser)?#i', '/'.$this->me->id, $method);
-        $method = preg_replace('#/:c(ommunity)?#i', '/'.$this->me->community, $method);
+        $uid = $this->me->id;
+        if($uid > 0){
+            $method = preg_replace('#/:u(ser)?#i', '/'.$this->me->id, $method);
+            $method = preg_replace('#/:c(ommunity)?#i', '/'.$this->me->community, $method);
+        }
 
         if(!isset($fields['token'])){ $fields['token'] = $this->request_token; }
 
