@@ -74,7 +74,7 @@ class ScholicaSession {
     /**
      * @var object representing current user
      */
-    private $me;
+    private $me_data;
 
     /**
      * Initialize Scholica instance
@@ -196,10 +196,12 @@ class ScholicaSession {
     public function request($method, $fields=array()){
         $method = ltrim($method, '/');
 
-        $uid = $this->me->id;
-        if($uid > 0){
-            $method = preg_replace('#/:u(ser)?#i', '/'.$this->me->id, $method);
-            $method = preg_replace('#/:c(ommunity)?#i', '/'.$this->me->community, $method);
+        if($method != 'me'){
+            $uid = $this->getMe()->id;
+            if($uid > 0){
+                $method = preg_replace('#/:u(ser)?#i', '/' . $this->getMe()->id, $method);
+                $method = preg_replace('#/:c(ommunity)?#i', '/' . $this->getMe()->community, $method);
+            }
         }
 
         if(!isset($fields['token'])){ $fields['token'] = $this->request_token; }
@@ -217,7 +219,7 @@ class ScholicaSession {
         }
 
         if($method == 'me'){
-            $this->me = $json;
+            $this->me_data = $json;
         }
         
         return $json;
@@ -227,8 +229,8 @@ class ScholicaSession {
      * Get current user profile ('/me' request)
      */
     public function getMe(){
-        if(isset($this->me)){
-            return $this->me;
+        if(isset($this->me_data)){
+            return $this->me_data;
         }else{
             return $this->request('me');
         }
