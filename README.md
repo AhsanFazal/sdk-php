@@ -9,7 +9,7 @@ Add it to your composer.json:
 
 ```json
   "require": {
-    "scholica": "0.1.*"
+    "scholica/scholica": "0.1.*"
   }
 ```
 
